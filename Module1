@@ -1,0 +1,65 @@
+Option Compare Database
+
+Public Sub updateTables()
+    Dim FilePath As String
+    Dim i As Long
+    Dim TableName As String
+    Const dirPath As String = "C:\work\temp\"
+    FilePath = Dir(dirPath & "*.csv")
+    
+    MsgBox "最新のCSV情報でテーブルを更新します"
+    
+    Do While FilePath <> ""
+        TableName = TableName(FilePath)
+        DoCmd.TransferText acImportDelim, , TableName, FilePath, True
+        MsgBox TableName & "を更新しました"
+        FilePath = Dir()
+    Loop
+    
+End Sub
+
+Private Function TableName(FilePath As String) As String
+    Dim temp As Long
+    Dim fileName As String
+    '一番最後の\マークの位置を検索
+    temp = InStrRev(FilePath, "\")
+    '\マークより後ろの部分を切り取る
+    fileName = Mid(FilePath, temp + 1)
+    '拡張子を削除
+    TableName = deleteExtension(fileName)
+End Function
+
+Function deleteExtension(FileNameWithExtension As String) As String
+    Dim lFindPoint As Long
+    '文字列の右端から"."を検索し、左端からの位置を取得する
+    lFindPoint = InStrRev(FileNameWithExtension, ".")
+    '拡張子を除いたファイル名の取得
+    deleteExtension = Left(FileNameWithExtension, lFindPoint - 1)
+End Function
+Public Sub ImportNewDaicho()
+    'ファイルのチェック
+    Call CheckFile
+    'ファイルの登録
+    Call ImportFile
+    
+End Sub
+
+Public Sub CheckFile()
+    'SD名の文字数チェック
+    
+    'Sコードが存在しているか
+    MsgBox "CheckFile"
+End Sub
+
+Public Sub ImportFile()
+    'ファイルを登録する
+    '１．SD名、SDコード、略称、表示順、第一日、第二日
+    '２．SDコードと対応するSコード
+    MsgBox "ImportFile"
+End Sub
+
+Public Sub ExportFiles()
+    'テンプレートファイルコピー
+    'コピーしたファイルを更新する
+End Sub
+
