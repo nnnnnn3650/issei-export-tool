@@ -66,10 +66,6 @@ End Sub
 
 Public Sub CreateData(sheet As Object)
     Dim Daicho As Daicho
-    'Dim DaichoShomo As DaichoShomo
-    Dim Name As String
-    Dim ExpiredDate As String
-    Dim List As Collection
     
     Daicho.SetName (SearchValue(sheet, NAME_ROW))
     Daicho.SetAbbreviation (SearchValue(sheet, ABBREVIATION_ROW))
