@@ -19,7 +19,6 @@ Public Sub setValue(Value As String)
 End Sub
 
 Public Function DaichoValues_isBlank() As Boolean
-    Dim DaichoValues_isBlank As Boolean
     If Value = "" Then
         MsgBox "’l‚ª“ü‚Á‚Ä‚¢‚Ü‚¹‚ñ"
         DaichoValues_isBlank = True

@@ -18,8 +18,7 @@ Public Sub setValue(Value As String)
     this.Value = Value
 End Sub
 
-Public Function DaichoValues_isBlank()
-    Dim DaichoValues_isBlank As Boolean
+Public Function DaichoValues_isBlank() As Boolean
     If Value = "" Then
         MsgBox "ílÇ™ì¸Ç¡ÇƒÇ¢Ç‹ÇπÇÒ"
         DaichoValues_isBlank = True
@@ -28,8 +27,7 @@ Public Function DaichoValues_isBlank()
     End If
 End Function
 
-Public Function DaichoValues_isLongerThanCharacterLimits()
-    Dim DaichoValues_isLongerThanCharacterLimits As Boolean
+Public Function DaichoValues_isLongerThanCharacterLimits() As Boolean
     If Len(Value) > CharacterLimit Then
         MsgBox "ï∂éöêîÇ™í¥âﬂÇµÇƒÇ¢Ç‹Ç∑"
         DaichoValues_isLongerThanCharacterLimits = True
@@ -38,14 +36,13 @@ Public Function DaichoValues_isLongerThanCharacterLimits()
     End If
 End Function
 
-Public Function DaichoValues_HasCheckedValue()
+Public Function DaichoValues_HasCheckedValue() As Boolean
     Dim CheckValues As New Collection
-    Dim CheckValue As Boolean
     CheckValues.Add (DaichoValues_isBlank)
     CheckValues.Add (DaichoValues_isLongerThanCharacterLimits)
     For i = 1 To CheckValues.Count
         If CheckValues.item(i) Is True Then
-            Set CheckValue = True
+            DaichoValues_HasCheckedValue = True
         End If
     Next i
 End Function

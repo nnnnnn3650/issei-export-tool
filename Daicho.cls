@@ -12,7 +12,7 @@ Option Explicit
 
 Private DaichoName As New DaichoName
 Private Abbreviation As New Abbreviation
-Private ExpriredDate As New ExpriredDate
+Private ExpiredDate As New ExpiredDate
 Private DaichoMember As New Collection
 
 Public Sub Class_Initialize()

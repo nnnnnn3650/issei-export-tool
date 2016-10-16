@@ -55,9 +55,8 @@ Public Sub ImportNewDaicho(FileName As String)
     Set app = CreateObject("Excel.Application")
     Set book = app.WorkBooks.Open(Filepath)
    
-    For i = 1 To book.Sheets.Count
-       Set sheet = book.Sheets(i).Select
-       CreateData (sheet)
+    For i = 1 To book.sheets.Count
+       Call CreateData(book.sheets(i))
     Next i
     
     'ƒtƒ@ƒCƒ‹‚Ì“o˜^
@@ -65,17 +64,17 @@ Public Sub ImportNewDaicho(FileName As String)
     
 End Sub
 
-Public Sub CreateData(ws As Object)
+Public Sub CreateData(sheet As Object)
     Dim Daicho As Daicho
-    Dim DaichoShomo As DaichoShomo
+    'Dim DaichoShomo As DaichoShomo
     Dim Name As String
     Dim ExpiredDate As String
     Dim List As Collection
     
-    Daicho.SetName (SearchValue(ws, NAME_ROW))
-    Daicho.SetAbbreviation (SearchValue(ws, ABBREVIATION_ROW))
-    Daicho.SetExpiredDate (SearchValue(ws, EXPRIREDDATE_ROW))
-    Daicho.SetShomo (SearchCollection(ws, MEMBER_LOW))
+    Daicho.SetName (SearchValue(sheet, NAME_ROW))
+    Daicho.SetAbbreviation (SearchValue(sheet, ABBREVIATION_ROW))
+    Daicho.SetExpiredDate (SearchValue(sheet, EXPRIREDDATE_ROW))
+    Daicho.SetShomo (SearchCollection(sheet, MEMBER_LOW))
     Daicho.insertTables
 End Sub
 Public Function SearchValue(ws As Object, searchWord As String)

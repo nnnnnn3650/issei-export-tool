@@ -13,8 +13,7 @@ Option Explicit
 Public Value As String
 Private Error As Collection
 
-Public Function isBlank()
-    Dim isBlank As Boolean
+Public Function isBlank() As Boolean
     If Value = "" Then
         MsgBox "’l‚ª“ü‚Á‚Ä‚¢‚Ü‚¹‚ñ"
         isBlank = True
@@ -23,8 +22,7 @@ Public Function isBlank()
     End If
 End Function
 
-Public Function isLongerThanCharacterLimits()
-    Dim isLongerThanCharacterLimits As Boolean
+Public Function isLongerThanCharacterLimits() As Boolean
     If Len(Value) > CharacterLimit Then
         MsgBox "•¶š”‚ª’´‰ß‚µ‚Ä‚¢‚Ü‚·"
         isLongerThanCharacterLimits = True
@@ -33,6 +31,6 @@ Public Function isLongerThanCharacterLimits()
     End If
 End Function
 
-Public Function HasCheckedValue()
+Public Function HasCheckedValue() As Boolean
     
 End Function
