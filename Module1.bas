@@ -2,7 +2,7 @@ Attribute VB_Name = "Module1"
 Option Compare Database
 
 Public Const NAME_ROW = "[名称]"
-Public Const ABBREVIATION_LOW = "[略]"
+Public Const ABBREVIATION_ROW = "[略]"
 Public Const EXPRIREDDATE_ROW = "[日程]"
 Public Const MEMBER_LOW = "[対象一覧]"
 
@@ -73,7 +73,7 @@ Public Sub CreateData(sheet As Object)
     Daicho.SetShomo (SearchCollection(sheet, MEMBER_LOW))
     Daicho.insertTables
 End Sub
-Public Function SearchValue(ws As Object, searchWord As String)
+Public Function SearchValue(sheet As Object, searchWord As String)
     Dim FoundCell As Range
     Dim SearchCell As Range
     Dim SearchValue As String
@@ -111,9 +111,3 @@ Public Sub ImportFile()
     '２．SDコードと対応するSコード
     MsgBox "ImportFile"
 End Sub
-
-Public Sub ExportFiles()
-    'テンプレートファイルコピー
-    'コピーしたファイルを更新する
-End Sub
-
