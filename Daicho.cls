@@ -10,19 +10,17 @@ Attribute VB_Exposed = False
 Option Compare Database
 Option Explicit
 
-Private Name
-Private Abbreviation
-Private ExpriredDate
-Private Member
-
-
+Private DaichoName As New DaichoName
+Private Abbreviation As New Abbreviation
+Private ExpriredDate As New ExpriredDate
+Private DaichoMember As New Collection
 
 Public Sub Class_Initialize()
         
 End Sub
 
 Public Sub SetName(Value As String)
-    Set Name = Value
+    DaichoName.setValue (Value)
 End Sub
 
 Public Sub SetAbbreviation(Value As String)
@@ -38,5 +36,48 @@ Public Sub SetShomo(List As Collection)
 End Sub
 
 Public Sub insertTables()
+    Dim isContainsErrors As Boolean
+    
+    ' 値のチェック
+    Set isContainsErrors = CheckValues
+    If isContainsErrors Then Exit Sub
+    End If
+    
+    'データをテーブルへ格納する
+    InsertDaichoTable
+    InsertDaichoMemberTable
+    
+End Sub
+
+Public Function CheckValues()
+    Dim Checker As DaichoChecke
+    Dim ErrorCollection As New Collection
+    Dim CheckValues As Boolean
+    
+    ErrorCollection.Add (Checker.ContainsValidationError(DaichoName))
+    ErrorCollection.Add (Checker.ContainsValidationError(ExpiredDate))
+    ErrorCollection.Add (Checker.ContainsValidationError(Abbreviation))
+    
+    CheckValues = isMemberOfCollection(ErrorCollection, True)
+End Function
+
+Function isMemberOfCollection(col As Collection, query) As Boolean
+    Dim item
+    
+    For Each item In col
+        If item = query Then
+            isMemberOfCollection = True
+            Exit Function
+        End If
+    Next
+    
+    isMemberOfCollection = False
+End Function
+
+Public Sub InsertDaichoTable()
+
+End Sub
+
+Public Sub InsertDaichoMemberTable()
 
 End Sub

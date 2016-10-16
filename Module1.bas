@@ -11,7 +11,8 @@ Public Sub updateTables()
     Dim Filepath As String
     Dim i As Long
     Dim TableName As String
-    Const dirPath As String = CurrentProject.Path
+    Dim dirPath As String
+    dirPath = CurrentProject.Path
     Filepath = Dir(dirPath & "\data\" & "*.csv")
     
     MsgBox "最新のCSV情報でテーブルを更新します"
@@ -49,13 +50,13 @@ Public Sub ImportNewDaicho(FileName As String)
     Dim sheet As Object
     Dim Filepath As String
     
-    Filepath = Application.CurrentProject.Path & "\" & FileName
+    Filepath = Application.CurrentProject.Path & "\irai\" & FileName
     
     Set app = CreateObject("Excel.Application")
-    Set book = Application.WorkBooks.Open(Filepath)
+    Set book = app.WorkBooks.Open(Filepath)
    
     For i = 1 To book.Sheets.Count
-       Set sheet = book.Sheets(Sheets(i).Name).Select
+       Set sheet = book.Sheets(i).Select
        CreateData (sheet)
     Next i
     
@@ -64,7 +65,7 @@ Public Sub ImportNewDaicho(FileName As String)
     
 End Sub
 
-Public Sub CreateData(ws As workSheet)
+Public Sub CreateData(ws As Object)
     Dim Daicho As Daicho
     Dim DaichoShomo As DaichoShomo
     Dim Name As String
@@ -77,7 +78,7 @@ Public Sub CreateData(ws As workSheet)
     Daicho.SetShomo (SearchCollection(ws, MEMBER_LOW))
     Daicho.insertTables
 End Sub
-Public Function SearchValue(ws As workSheet, searchWord As String)
+Public Function SearchValue(ws As Object, searchWord As String)
     Dim FoundCell As Range
     Dim SearchCell As Range
     Dim SearchValue As String
@@ -91,7 +92,7 @@ Public Function SearchValue(ws As workSheet, searchWord As String)
     End If
 End Function
 
-Public Function SearchCollection(ws As workSheet, searchWord As String)
+Public Function SearchCollection(ws As Object, searchWord As String)
     Dim FoundCell As Range
     Dim ActiveCell As Range
     Dim SearchValue As String
@@ -103,7 +104,7 @@ Public Function SearchCollection(ws As workSheet, searchWord As String)
         FoundCell.Select
         Set ActiveCell = FoundCell.Offset(1, 0).Activate '一つ下に移動
         Do Until ActiveCell.Value = ""
-            SearchCollection.Add Item:=ActivateCell.Value
+            SearchCollection.Add item:=ActivateCell.Value
             ActiveCell.Offset(1, 0).Select
         Loop
     End If
